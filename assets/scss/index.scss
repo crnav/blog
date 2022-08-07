@@ -1,0 +1,46 @@
+@use "element-plus/dist/index.css";
+@use "element-plus/theme-chalk/dark/css-vars.css";
+@use "./theme.css";
+
+.warpper {
+  max-width: 1200px;
+}
+.module-bg {
+  background-color: var(--module-bg);
+}
+.module-shadow {
+  box-shadow: 0 0 10px -2px hsl(0deg 0% 62% / 20%);
+}
+
+.itliuyang {
+  // padding-top: 70px;
+  min-width: max-content;
+}
+
+#background {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  .image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url(@/assets/images/background.png);
+    background-attachment: fixed;
+    opacity: 0.3;
+  }
+}
+
+input,
+textarea {
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .main {
+    width: 810px;
+    min-width: 810px;
+  }
+}
