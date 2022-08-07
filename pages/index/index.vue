@@ -6,7 +6,7 @@
       <Swiper :sList="swiperList">
         <template #default="{ data }">
           <span class="swiper-tips">{{ data.tips }}</span>
-          <img :src="data.url" alt="" class=" "/>
+          <img :src="data.url" alt="" class=" " />
         </template>
       </Swiper>
     </div>
@@ -52,12 +52,10 @@
         <div
           class="w-28 flex justify-center items-center text-sm p-2 pr-4 -mr-2 group-hover:text-white"
         >
-          {{
-            data.count == data.list.length 
-              ? "到底了"
-              : "更多数据"
-          }}
-          <el-icon class="ml-1 animate-bounce" v-if="data.count != data.list.length"
+          {{ data.count == data.list.length ? "到底了" : "更多数据" }}
+          <el-icon
+            class="ml-1 animate-bounce"
+            v-if="data.count != data.list.length"
             ><ArrowDownBold
           /></el-icon>
         </div>
@@ -68,8 +66,10 @@
 
 <script setup lang="ts">
 import { ArrowDownBold } from "@element-plus/icons-vue";
-
+import { ref } from "vue";
 import banner from "@/assets/images/banner.jpg";
+import { getNoticePageList } from "~~/composables/api";
+
 const swiperList = ref([
   { tips: "banner1", url: banner },
   { tips: "banner2", url: banner },
@@ -86,6 +86,7 @@ let data: any = ref({
 //
 
 const resNotice: any = await getNoticePageList();
+console.log("log=>", resNotice);
 const noticeList = resNotice.data;
 
 const resArticle: any = await getArticlePageList();

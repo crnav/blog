@@ -14,7 +14,7 @@
         class="hidden md:block left-aside"
         :class="{ 'menu-block': menuStore.menuVisible }"
       >
-        <CMenu></CMenu>
+        <!-- <CMenu></CMenu> -->
       </aside>
       <!-- 内容 -->
       <section class="main mb-2 w-screen">
@@ -27,9 +27,9 @@
         <!-- 统计 -->
         <!-- <CardStatistics></CardStatistics> -->
         <!-- 热门 -->
-        <card-hot></card-hot>
+        <!-- <card-hot></card-hot> -->
         <!-- 分类 -->
-        <card-classify></card-classify>
+        <!-- <card-classify></card-classify> -->
       </aside>
     </section>
     <footer
