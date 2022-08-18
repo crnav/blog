@@ -3,6 +3,7 @@
     <!-- {{ id }}
     {{ info }} -->
     <Title>{{ info.title }}</Title>
+    {{pageStore.data}}
     <!--  <div class="p-6">
       <text class="text-2xl text-center block">{{ info.title }} </text>
       <div class="flex justify-center text-xs text-gray-400 mt-2">
@@ -25,6 +26,7 @@ import "md-editor-v3/lib/style.css";
 
 const color = useColorMode();
 const router = useRouter();
+const pageStore = usePageStore();
 
 const { timeago } = useDateStore();
 // id

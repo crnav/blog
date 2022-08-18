@@ -3,8 +3,11 @@
 
 const fetch = (url: string, options?: any) => {
     // console.log('log000=>', { ...options })
+    // console.log('process', process)
     options['headers'] = { url: url }
+    // options['server'] = server
     return new Promise((resolve, reject) => {
+        // if (process.server) {
         useFetch('/api/', { ...options }).then(({ data, error }) => {
             if (error.value) {
                 reject(error.value)
@@ -19,16 +22,20 @@ const fetch = (url: string, options?: any) => {
                 resolve(value)
             }
         }).catch((err: any) => {
-            console.log(err)
+            // console.log(err)
             reject(err)
         })
+        // }else{
+        //     console.log('process', process)
+        // }
+
     })
 }
 
 export default new class Http {
 
-    get(url: string, params?: any) {
-        return fetch(url, { method: 'get', params })
+    get(url: string, params?: any, server?: Boolean) {
+        return fetch(url, { method: 'get', params, server: server })
     }
 
     post(url: string, body?: any) {

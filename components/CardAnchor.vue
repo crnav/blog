@@ -27,8 +27,7 @@ export default {
     };
   },
   mounted() {
-    console.log(this.refPreview)
-    debugger;
+
     const anchors =
       this.$refs.preview.$el.querySelectorAll("h1,h2,h3,h4,h5,h6");
     const titles = Array.from(anchors).filter(

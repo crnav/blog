@@ -6,7 +6,7 @@
       <Swiper :sList="swiperList">
         <template #default="{ data }">
           <span class="swiper-tips">{{ data.tips }}</span>
-          <img :src="data.url" alt="" class=" " />
+          <img :src="data.url" alt="banner" class=" " />
         </template>
       </Swiper>
     </div>
@@ -25,17 +25,13 @@
     </div>
     <!-- 文章 -->
     <div class="article-box">
-      <div
-        class="default-radius"
-        v-for="(item, index) in data.list"
-        :key="item.id"
-      >
+      <div class="default-radius" v-for="item in state.dataList" :key="item.id">
         <card-article-item :item="item"></card-article-item>
       </div>
     </div>
     <div
       class="rounded-sm relative overflow-hidden flex justify-between group h-10 w-full cursor-pointer"
-      @click="onLoadingData"
+      @click="getDataList()"
     >
       <div
         class="skew-20 text-sm p-2 pl-4 -ml-2 flex-1 mr-2 box-bg-color h-full"
@@ -47,15 +43,19 @@
         class="flex justify-between absolute w-full h-full z-10 items-center group"
       >
         <div class="text-sm p-2 pl-4 -ml-2 flex-1 mr-2">
-          {{ data.list.length > 0 ? data.list.length + "/" + data.count : "" }}
+          {{
+            state.dataList.length > 0
+              ? state.dataList.length + "/" + state.total
+              : ""
+          }}
         </div>
         <div
           class="w-28 flex justify-center items-center text-sm p-2 pr-4 -mr-2 group-hover:text-white"
         >
-          {{ data.count == data.list.length ? "到底了" : "更多数据" }}
+          {{ ["", "到底了", "更多数据"][state.pageStatus] }}
           <el-icon
             class="ml-1 animate-bounce"
-            v-if="data.count != data.list.length"
+            v-if="state.total != state.dataList.length"
             ><ArrowDownBold
           /></el-icon>
         </div>
@@ -66,58 +66,34 @@
 
 <script setup lang="ts">
 import { ArrowDownBold } from "@element-plus/icons-vue";
-import { ref } from "vue";
 import banner from "@/assets/images/banner.jpg";
-import { getNoticePageList } from "~~/composables/api";
 
 const swiperList = ref([
   { tips: "banner1", url: banner },
   { tips: "banner2", url: banner },
 ]);
 
-let query: any = {
-  page: 1,
-  pageSize: 10,
-};
-let data: any = ref({
-  count: 0,
-  list: [],
-});
-//
-
+// 消息通知
 const resNotice: any = await getNoticePageList();
-console.log("log=>", resNotice);
 const noticeList = resNotice.data;
 
+const state: any = reactive({
+  dataListUrl: "/article/pageList",
+});
+// 分页一些方法
+const { getDataList, setState } = useCrud(state);
+
+// 获取文章
 const resArticle: any = await getArticlePageList();
-data.value.count = resArticle.data.count;
-data.value.list = resArticle.data.rows;
+setState(resArticle.data);
 
-// 加载数据
-const loadData = async () => {
-  // 到底了
-  if (data.value.count == data.value.list.length && query.page != 1) {
-    return;
-  }
-  query.page++;
-  const resArticle: any = await getArticlePageList(query);
-  data.value.count = resArticle.data.count;
-  // 其它页
-  data.value.list = data.value.list.concat(resArticle.data.rows);
-};
-
-const onLoadingData = async () => {
-  loadData();
-};
 </script>
+
 <style scoped lang="scss">
 $_color: #ffffff;
 $_text-secondary: rgba(0, 0, 0, 0.5);
 $bgColor: rgba(255, 255, 255, 0.8);
 
-.paging-box {
-  overflow: hidden;
-}
 .carousel-img {
   width: 100%;
   height: 240px;

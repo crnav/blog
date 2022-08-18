@@ -3,9 +3,8 @@
     <Title>{{ $route.params.id }}</Title>
     <!-- banner -->
     <div class="swiper-box default-radius">
-      <!-- <img src="@/assets/images/here-we-go.png" alt="" /> -->
       <div class="tips">
-        <h2>{{ $route.query.title }}</h2>
+        <h2>{{ info.name }}</h2>
       </div>
     </div>
     <!-- 文章 -->
@@ -22,13 +21,19 @@
 </template>
 <script setup lang="ts">
 const route = useRoute();
+const usePage = usePageStore();
+const info: any = reactive({});
+const id: any = ref(route.params.id);
 
-const id = ref(route.params.id);
 const res: any = await getClassifyArticleList({ id: id._value });
 const articleList: any = ref({ rows: [] });
 if (res.code == 1) {
   articleList.value = res.data;
 }
+// 客户端显示
+onMounted(() => {
+  Object.assign(info, usePage.data);
+});
 </script>
 <style scoped lang="scss">
 .swiper-box {

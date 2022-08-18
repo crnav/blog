@@ -3,17 +3,25 @@
  * 格式化时间
  * 调用formatDate(strDate, 'yyyy-MM-dd');
  */
+
 export const useDateStore = () => ({
     timeago: (strDate: String) => {
 
         if (!strDate) { return; }
-        if (strDate.indexOf("T") > -1) {
-            strDate = strDate.split("T")[0] + ' ' + strDate.split("T")[1]
-            strDate = strDate.split(".")[0]
-        }
-        // console.log(strDate)
-        // .replace(/-/, '/')
-        strDate = new Date(strDate);
+
+        // if (strDate.indexOf("T") > -1) {
+        //     strDate = strDate.split("T")[0] + ' ' + strDate.split("T")[1]
+        //     strDate = strDate.split(".")[0]
+        // }
+        // // console.log(strDate)
+        // // .replace(/-/, '/')
+        // strDate = new Date(strDate);
+
+        strDate = strDate.replace("Z", '')
+        let temp = new Date(strDate)
+        // 需要加8小时才是当地时间
+        strDate = new Date(temp.getTime() + (1000 * 60 * 60 * 8))
+
         const dateTimeStamp = Date.parse(strDate)
         let result = ''
         var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示
@@ -59,3 +67,13 @@ export const useDateStore = () => ({
         return result;
     }
 })
+
+function format_date(date) {
+    date = date.replace("Z", '')
+    let temp = new Date(date)
+    // 需要加8小时才是当地时间
+    let d = new Date(temp.getTime() + (1000 * 60 * 60 * 8))
+    return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}`
+}
+
+

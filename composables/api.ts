@@ -27,11 +27,11 @@ export const getDetail = (params?: { id: any }) => {
  * 获取分类列表
 */
 export const getClassifyList = (params?: any) => {
-    return Http.get(`/classify/list`,params)
+    return Http.get(`/classify/list`, params)
 }
 // 分类相关的 文章列表
 export const getClassifyArticleList = (params?: any) => {
-    return Http.get(`/article/classifyList`,params)
+    return Http.get(`/article/classifyList`, params)
 }
 
 
@@ -47,8 +47,8 @@ export const getNoticePageList = (params?: any) => {
 /**
  * 评论列表
  * */
-export const getCommentList = (params?: any) => {
-    return Http.get(`/comment/list`, params)
+export const getCommentList = (params?: any, server = true) => {
+    return Http.get(`/comment/list`, params, server)
 }
 /**
  * 评论
@@ -56,7 +56,12 @@ export const getCommentList = (params?: any) => {
 export const getCommentAdd = (data?: any) => {
     return Http.post(`/comment/add`, data)
 }
-
+/**
+ * 回复
+ * */
+export const commentReply = (data?: any) => {
+    return Http.post(`/comment/reply`, data)
+}
 
 
 
@@ -66,13 +71,19 @@ export const getCommentAdd = (data?: any) => {
 export const getLink = (params?: any) => {
     return Http.get(`/links/list`, params)
 }
+/**
+获取网站列表
+*/
+export const getTypeLink = (params?: any) => {
+    return Http.get(`/linksType/listAndType`, params)
+}
 
 
 /**
  * 获取md文档  友链  关于 等页面内容
  * */
 export const getMD = (params?: any) => {
-    console.log('params-->', params)
+    // console.log('params-->', params)
     return Http.get(`/info/getMd`, params)
 }
 

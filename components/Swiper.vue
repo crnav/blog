@@ -74,7 +74,7 @@ export default {
     },
   },
   onMounted() {
-    console.log("onMounted3");
+    // console.log("onMounted3");
   },
   setup(props) {
     const getDirection = ref("");

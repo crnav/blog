@@ -10,8 +10,8 @@ export const useMenuStore = defineStore('menuVisible', {
   }),
   actions: {
     show() {
-      console.log('show')
       this.menuVisible= true
+      
     },
     hide() {
       this.menuVisible= false

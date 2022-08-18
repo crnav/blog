@@ -3,6 +3,7 @@
     <nuxt-link :to="'/detail/' + item.id" class="ab-item-img w-40 md:w-48">
       <el-image
         :src="item.coverUrl"
+        :alt="item.title"
         style="width: 100%; height: 100%"
         fit="cover"
       />
@@ -14,8 +15,8 @@
       <nuxt-link :to="`/detail/${item.id}`">
         <h5 class="title truncate">{{ item.title }}</h5>
       </nuxt-link>
-      <div class="description">{{ item.desc }}</div>
-      <div class="ab-item-content-footer">
+      <div class="omit3 flex-1 text-sm">{{ item.desc }}</div>
+      <div class="ab-item-content-footer mt-1">
         <span class="flex items-center mr-6">
           <el-icon class="mr-1"><UserFilled /></el-icon>
           {{item.userName || '暂无'}}
@@ -138,7 +139,6 @@ const { timeago } = useDateStore();
       height: 30px;
       font-size: 12px;
       color: var(--el-menu-text-color);
-      margin-top: 10px;
     }
   }
 }

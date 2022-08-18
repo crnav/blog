@@ -14,11 +14,13 @@
       :previewOnly="true"
       v-model="info.content"
     ></MdEditor>
-    <show-img
+    <!-- <show-img
       v-model="imgsVisible"
       :initialIndex="initialIndex"
       :srcList="srcList"
-    ></show-img>
+    ></show-img> -->
+    <comment-container :c_id="id"></comment-container>
+
   </div>
 </template>
 
@@ -32,7 +34,7 @@ const { timeago } = useDateStore();
 // id
 const route = useRoute();
 const router = useRouter();
-const id = route.params.id;
+const id = route.params.id+'';
 
 // 详情
 const res: any = await getDetail({ id: id });
@@ -63,7 +65,6 @@ const imgsVisible = ref(false);
 
 // md 图片点击
 let imageClick = (images, currentIndex) => {
-  console.log(images);
   // imgsVisible = true;
   imgsVisible.value = true;
   // src.value = images[currentIndex];

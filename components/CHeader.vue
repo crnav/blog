@@ -27,9 +27,9 @@
           :class="{ 'on-menu': menuStore.menuVisible }"
           @click="toggleMenu"
         >
-          <span ></span>
-          <span ></span>
-          <span ></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </span>
       </div>
     </div>
@@ -38,7 +38,6 @@
 
 <script setup lang="ts">
 import { Moon, Sunny } from "@element-plus/icons-vue";
-import { useMenuStore } from "../stores/menu";
 
 const menuStore = useMenuStore();
 
@@ -52,8 +51,11 @@ const toggleDark = () => {
 
 const toggleMenu = () => {
   if (menuStore.menuVisible) {
+    document.documentElement.style.overflow = "auto";
     menuStore.hide();
   } else {
+    document.documentElement.style.overflow = "hidden";
+
     menuStore.show();
   }
 };

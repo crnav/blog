@@ -2,11 +2,13 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
+    "build:analyze": "nuxt build --analyze",
     "dev": "nuxt dev",
     "start": "node .output/server/index.mjs",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
   },
+  
   "devDependencies": {
     "nuxt": "3.0.0-rc.4"
   },
@@ -17,6 +19,7 @@
     "element-plus": "^2.2.6",
     "md-editor-v3": "^2.2.0",
     "pinia": "^2.0.17",
+    "pinia-plugin-persistedstate": "^2.1.1",
     "sass": "^1.53.0",
     "swiper": "^8.2.5",
     "vue": "^3.2.37"

@@ -9,7 +9,7 @@
     ></MdEditor>
     <div class="flex flex-wrap">
       <div
-        class="rounded-sm w-6/12  md:w-4/12 p-2"
+        class="rounded-sm w-6/12 md:w-4/12 p-2"
         v-for="item in linksList"
         :key="item.id"
       >
@@ -42,21 +42,13 @@
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 
-useHead({
-  title: "友链-刘洋博客-itliuyang.com",
-  viewport: "width=device-width,initial-scale=1,maximum-scale=1 ",
-  charset: "utf-8",
-  meta: [
-    { name: "description", content: "刘洋个人博客" },
-    { name: "keywords", content: "刘洋博客,itliuyang" },
-  ],
-});
+
 
 const color: any = useColorMode();
 
 // 获取连接
 const resLink: any = await getLink();
-const linksList: Array = ref(resLink.data);
+const linksList: any = ref(resLink.data);
 // 获取md
 const res: any = await getMD({ name: "links" });
 const data = ref(res.data);

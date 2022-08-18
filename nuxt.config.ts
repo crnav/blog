@@ -2,7 +2,6 @@ import { defineNuxtConfig } from 'nuxt'
 const lifecycle = process.env.npm_lifecycle_event
 
 
-
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
     router: {
@@ -10,35 +9,38 @@ export default defineNuxtConfig({
             return { x: 0, y: 0 }
         }
     },
+    
     meta: {
         htmlAttrs: {
             "lang": 'zh-CN'
         },
-        titleTemplate: '%s - 刘洋博客',
-        title: '刘洋博客',
+        titleTemplate: '%s - itliuyang.com',
+        title: 'itliuyang.com',
         meta: [
             { name: 'theme-color', content: 'light' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            { name: 'viewport', content: 'width=device-width,height=device-height, user-scalable=no,initial-scale=1, minimum-scale=1, maximum-scale=1' },
+            { name: 'viewport', content: 'initial-scale=1,maximum-scale=1, minimum-scale=1, user-scalable=no' },
             {
                 hid: 'description',
                 name: 'description',
-                content: '刘洋博客',
+                content: '刘洋博客,主要用于摸摸鱼,写写日志,记录记录文章的一个nuxt网站',
+            },
+            {
+                hid: 'keywords',
+                content: '刘洋博客,nuxt网站,nuxt3网站,vue网站,刘洋个人网站,刘洋网站',
             },
         ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }, { type: 'script', href: '/js/index.js' }],
     },
 
     // css
     css: ['~/assets/scss/index.scss',],
-
 
     // 主题色
     colorMode: {
         classSuffix: '',
     },
     modules: [
-        '@pinia/nuxt',
+        // '@pinia/nuxt',
         '@nuxtjs/color-mode',
     ],
     vueuse: {
@@ -49,6 +51,6 @@ export default defineNuxtConfig({
         transpile:
             lifecycle === 'build' || lifecycle === 'generate' ? ['element-plus'] : [],
     },
-    buildModules: ['@nuxtjs/tailwindcss']
+    buildModules: ['@nuxtjs/tailwindcss', ['@pinia/nuxt', { disableVuex: true }]]
 
 })
